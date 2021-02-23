@@ -28,9 +28,20 @@ namespace WebApp
         {
 
             services.AddControllers();
-            services.AddSwaggerGen(c =>
+            // services.AddSwaggerGen(c =>
+            // {
+            //     c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApp", Version = "v1" });
+            // });
+
+            services.AddSwaggerGen(swagger =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApp", Version = "v1" });
+                //This is to generate the Default UI of Swagger Documentation  
+                swagger.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "Dorset College API",
+                    Description = "ASP.NET Core 3.1 Web API Documentaion"
+                });
             });
         }
 
