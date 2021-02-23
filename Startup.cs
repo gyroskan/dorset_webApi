@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using WebApp.Data;
 
 namespace WebApp
 {
@@ -28,10 +29,11 @@ namespace WebApp
         {
 
             services.AddControllers();
-            // services.AddSwaggerGen(c =>
-            // {
-            //     c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApp", Version = "v1" });
-            // });
+
+            services.AddDbContext<Context>(opt =>
+            {
+                opt.UseMySql(Configuration.GetConnectionString("DefaultConnection"));
+            });
 
             services.AddSwaggerGen(swagger =>
             {
@@ -52,7 +54,7 @@ namespace WebApp
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApp v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("   ", "WebApp v1"));
             }
 
             app.UseHttpsRedirection();
